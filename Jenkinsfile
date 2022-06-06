@@ -12,10 +12,25 @@ pipeline {
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
-        stage('Build Docker Image') {
-            when {
+        stage('build and push docker image') {
+            /*when {
                 branch 'master'
+            }*/
+            
+            
+            steps {
+                sh 'sudo docker build -t shubha123anindya/finalproject:$BUILD_NUMBER .'
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
+                    sh "sudo docker login -u ${env.user} -p ${env.pass}"
+                    sh 'sudo docker push shubha123anindya/finalproject:$BUILD_NUMBER'
+                }
             }
+            
+            
+            
+            
+            
+            /*
             steps {
                 script {
                     app = docker.build(DOCKER_IMAGE_NAME)
@@ -24,7 +39,15 @@ pipeline {
                     }
                 }
             }
+            */
+            
+            
         }
+        
+        /*
+        
+        
+        
         stage('Push Docker Image') {
             when {
                 branch 'master'
@@ -75,5 +98,9 @@ pipeline {
                 )
             }
         }
+    
+    */
+    
+    
     }
 }
