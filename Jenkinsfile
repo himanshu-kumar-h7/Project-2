@@ -36,7 +36,14 @@ pipeline {
                 }
                 */
           
-                    sh 'sudo docker build -t shubha123anindya/train-schedule:$BUILD_NUMBER .'
+                sh 'sudo docker build -t shubha123anindya/train-schedule:$BUILD_NUMBER .'
+                
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
+                    sh "sudo docker login -u ${env.user} -p ${env.pass}"
+                    sh 'sudo docker push shubha123anindya/train-schedule:$BUILD_NUMBER'
+                }
+                
+                
                 }
         }
         
