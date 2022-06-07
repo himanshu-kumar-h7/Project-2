@@ -12,6 +12,7 @@ pipeline {
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
+        /*
         stage ('build and push docker image') {
             steps {
                 sh 'sudo docker build -t shubha123anindya/train-schedule:$BUILD_NUMBER .'
@@ -21,8 +22,8 @@ pipeline {
                 }
             }
         }
+        */
         
-        /*
         stage('Build Docker Image') {
             
             steps {
@@ -52,7 +53,6 @@ pipeline {
         }
         
         
-        */
         stage('CanaryDeploy') {
             when {
                 branch 'master'
