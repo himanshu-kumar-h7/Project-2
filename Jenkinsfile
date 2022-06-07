@@ -25,7 +25,7 @@ pipeline {
         }
         */
         
-        stage('Build Docker Image') {
+        stage('Build and push docker image') {
             
             steps {
                 /*
@@ -49,7 +49,7 @@ pipeline {
         }
         
         
-        
+        /*
         stage('Push Docker Image') {
             when {
                 branch 'master'
@@ -63,8 +63,23 @@ pipeline {
                 }
             }
         }
+        */
         
         
+        stage ('kubernetes deployment') {
+            steps {
+               // sh 'kubectl apply -f deployment.yaml'
+                sh 'kubectl set image deployment train-schedule train-schedule=shubha123anindya/train-schedule:$BUILD_NUMBER'
+                
+            }
+        }
+        
+        
+        
+        
+        
+        
+        /*
         stage('CanaryDeploy') {
             when {
                 branch 'master'
@@ -80,6 +95,8 @@ pipeline {
                 )
             }
         }
+        
+        
         stage('DeployToProduction') {
             when {
                 branch 'master'
@@ -102,5 +119,7 @@ pipeline {
                 )
             }
         }
+        
+        */
     }
 }
