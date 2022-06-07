@@ -3,6 +3,7 @@ pipeline {
     environment {
         //be sure to replace "bhavukm" with your own Docker Hub username
         DOCKER_IMAGE_NAME = "shubha123anindya/train-schedule"
+        DOCKER_COMMON_CREDS = credentials('dockerhub')
     }
     stages {
         stage('Build') {
@@ -38,10 +39,10 @@ pipeline {
           
                 sh 'sudo docker build -t shubha123anindya/train-schedule:$BUILD_NUMBER .'
                 
-                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
-                    sh "sudo docker login -u ${env.user} -p ${env.pass}"
+               // withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
+                    sh "sudo docker login -u ${DOCKER_COMMON_CREDS_USR} -p ${DOCKER_COMMON_CREDS_PSW}"
                     sh 'sudo docker push shubha123anindya/train-schedule:$BUILD_NUMBER'
-                }
+                //}
                 
                 
                 }
