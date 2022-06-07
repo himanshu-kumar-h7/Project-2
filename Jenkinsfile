@@ -26,17 +26,18 @@ pipeline {
         
         stage('Build Docker Image') {
             
-            /*
             steps {
+                /*
                 script {
                     app = sudo docker.build(DOCKER_IMAGE_NAME)
                     app.inside {
                         sh 'echo Hello, World!'
                     }
                 }
-            }
-            */
-            sh 'sudo docker build -t shubha123anindya/train-schedule:$BUILD_NUMBER .'
+                */
+          
+                    sh 'sudo docker build -t shubha123anindya/train-schedule:$BUILD_NUMBER .'
+                }
         }
         
         
