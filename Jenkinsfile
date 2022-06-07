@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         //be sure to replace "bhavukm" with your own Docker Hub username
-        DOCKER_IMAGE_NAME = "shubha123anindya/finalproject"
+        DOCKER_IMAGE_NAME = "shubha123anindya/train-schedule"
     }
     stages {
         stage('Build') {
@@ -12,25 +12,8 @@ pipeline {
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
-        stage('build and push docker image') {
-            /*when {
-                branch 'master'
-            }*/
+        stage('Build Docker Image') {
             
-            
-            steps {
-                sh 'sudo docker build -t shubha123anindya/finalproject:$BUILD_NUMBER .'
-                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
-                    sh "sudo docker login -u ${env.user} -p ${env.pass}"
-                    sh 'sudo docker push shubha123anindya/finalproject:$BUILD_NUMBER'
-                }
-            }
-            
-            
-            
-            
-            
-            /*
             steps {
                 script {
                     app = docker.build(DOCKER_IMAGE_NAME)
@@ -39,15 +22,7 @@ pipeline {
                     }
                 }
             }
-            */
-            
-            
         }
-        
-        /*
-        
-        
-        
         stage('Push Docker Image') {
             when {
                 branch 'master'
@@ -98,9 +73,5 @@ pipeline {
                 )
             }
         }
-    
-    */
-    
-    
     }
 }
