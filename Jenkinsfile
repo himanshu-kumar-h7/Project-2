@@ -4,6 +4,7 @@ pipeline {
         DOCKER_IMAGE_NAME = "shubha123anindya/train-schedule"
         DOCKER_COMMON_CREDS = credentials('dockerhub')
     }
+    
     stages {
         stage('Build') {
             steps {
