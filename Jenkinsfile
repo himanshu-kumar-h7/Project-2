@@ -24,7 +24,7 @@ pipeline {
          steps {
                 sh 'kubectl apply -f deployment.yaml'
                 sh 'kubectl set image deployment train-schedule train-schedule=shubha123anindya/train-schedule:$BUILD_NUMBER'   
-            }
+            } 
         }
     }
 }
