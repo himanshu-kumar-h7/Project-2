@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent any 
     environment {
         DOCKER_IMAGE_NAME = "shubha123anindya/train-schedule"
         DOCKER_COMMON_CREDS = credentials('dockerhub')
