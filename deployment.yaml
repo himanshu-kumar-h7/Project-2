@@ -16,8 +16,7 @@ spec:
      - containerPort: 8080
      env: 
      - name: ALLOW_EMPTY_PASSWORD
-       value: "yes"
-       
+       value: "yes"    
  selector:
   matchLabels:
    app: ab
