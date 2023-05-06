@@ -19,5 +19,5 @@ spec:
        value: "yes"    
  selector:
   matchLabels:
-   app: ab
+   app: ab 
  
