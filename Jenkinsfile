@@ -25,6 +25,6 @@ pipeline {
                 sh 'kubectl apply -f deployment.yaml'
                 sh 'kubectl set image deployment train-schedule train-schedule=Himanshu/train-schedule:$BUILD_NUMBER'   
             }  
-        }
+        } 
     }
 }
