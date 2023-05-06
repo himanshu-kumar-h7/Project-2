@@ -19,7 +19,7 @@ pipeline {
                 sh "sudo docker login -u ${DOCKER_COMMON_CREDS_USR} -p ${DOCKER_COMMON_CREDS_PSW}"
                 sh 'sudo docker push Himanshu/train-schedule:$BUILD_NUMBER'
                 }
-        }  
+        }   
       stage ('Kubernetes deployment') {
          steps {
                 sh 'kubectl apply -f deployment.yaml'
